@@ -6,6 +6,7 @@ const getID = async (req, res, next) => {
   const info = await client.v2.userByUsername(name)
   console.log(info)
   res.send(info)
+  next()
 }
 
 const getFollowing = async (req, res, next) => {
@@ -13,6 +14,7 @@ const getFollowing = async (req, res, next) => {
   const friends = await client.v1.userFollowingIds({ user_id: ID })
   console.log(friends)
   res.send(friends)
+  next()
 }
 
 const searchTweets = async (req, res, next) => {
@@ -21,12 +23,15 @@ const searchTweets = async (req, res, next) => {
   const tweets = await client.v2.search(`from:${tweeter} @${mentioned}`)
   console.log(tweets)
   res.send(tweets)
+  next()
 }
 
-// WIP - convert 100 IDs (in JSON format) to 100 users
 const IDstoUsers = async (req, res, next) => {
-
-  res.send()
+  const IDList = JSON.parse(req.query.IDs)
+  const users = await client.v2.users(IDList)
+  console.log(users)
+  res.send(users)
+  next()
 }
 
-module.exports = { getID, getFollowing, searchTweets }
+module.exports = { getID, getFollowing, searchTweets, IDstoUsers }
