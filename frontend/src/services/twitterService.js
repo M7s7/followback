@@ -1,5 +1,6 @@
 import axios from 'axios'
-const baseUrl = "http://localhost:3001"
+const baseUrl = process.env.REACT_APP_SERVER_URL
+
 
 const userID = async (user) => {
   try {
@@ -14,7 +15,7 @@ const userID = async (user) => {
 
 const userFollowing = async (ID) => {
   try {
-    const res = await axios.get(`http://localhost:3001/following?ID=${ID}`)
+    const res = await axios.get(`${baseUrl}/following?ID=${ID}`)
     console.log(res.data)
     return res.data
 
@@ -27,7 +28,7 @@ const userFollowing = async (ID) => {
 const getMutuals = async (list1, list2) => {
   try {
     const mutualIDs = list1.filter(ID => list2.includes(ID))
-    const res = await axios.get(`http://localhost:3001/ids-to-users`, {
+    const res = await axios.get(`${baseUrl}/ids-to-users`, {
       params: {
         IDs: JSON.stringify(mutualIDs)
       }
