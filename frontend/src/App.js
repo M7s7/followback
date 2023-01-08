@@ -2,11 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { userID, userFollowing, getMutuals } from './services/twitterService'
 
 const App = () => {
-  const [names, setNames] = useState([])
-  const [buttonState, toggleButton] = useState(0)
+  const [names, setNames] = useState(["", ""])
+  const [inputs, setInputs] = useState(["", ""])
   const [data, setData] = useState([])
 
   const fetchTwitterData = async (name1, name2) => {
+    if (name1 === "" || name2 === "") {
+      console.log("Invalid entry")
+      return
+    }
+
     const ID1 = await userID(name1)
     const friends1 = await userFollowing(ID1.data.id)
 
@@ -37,31 +42,55 @@ const App = () => {
     })
   }
 
+  const handleInput = (event) => {
+    if (event.target.id === "user1") {
+      setInputs([event.target.value, inputs[1]])
+    }
 
-  const handleClick = (event) => {
-    toggleButton(buttonState + 1);
-    console.log(`Button state was ${buttonState}`)
+    if (event.target.id === "user2") {
+      setInputs([inputs[0], event.target.value])
+    }
+  }
+
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    setNames(inputs)
+    console.log(names, inputs)
   }
 
 
   return (
     <div>
-      <Display names={["LauraPrepon", "samirawiley"]} data={data} fetchData={fetchTwitterData} />
+      State variables: name0:{names[0]} // name1:{names[1]} // input0:{inputs[0]} // input1:{inputs[1]}
+      <Form inputs={inputs} handleInput={handleInput} handleSubmit={handleSubmit} />
+      <Display names={names} data={data} fetchData={fetchTwitterData} />
     </div>
   )
 }
+
+const Form = ({ inputs, handleInput, handleSubmit }) => {
+  return (
+<div>
+    <input value={inputs[0]} id="user1" onChange={handleInput} />
+    <input value={inputs[1]} id="user2" onChange={handleInput} />
+    <button onClick={handleSubmit}> GO! </button>
+</div>
+  )
+ }
 
 
 const Display = ({ names, data, fetchData }) => {
   useEffect(() => {
     fetchData(names[0], names[1])
     console.log(data)
-  }, [])
+  }, [names])
 
   if (data.length === 0) {
     return (
       <>
         Enter two usernames to get started!
+        names are {names[0]} and {names[1]}
       </>
     )
   }
@@ -72,7 +101,6 @@ const Display = ({ names, data, fetchData }) => {
 
   return (
     <div>
-      State variables: {names[0]} {names[1]}
       <MutualFollowingStatus data={data} />
     </div>
   )
