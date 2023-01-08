@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { userID, userFollowing, getMutuals } from './services/twitterService'
+import { Display, Form } from './components'
 
 const App = () => {
   const [names, setNames] = useState(["", ""])
   const [inputs, setInputs] = useState(["", ""])
   const [data, setData] = useState([])
 
+  // Helper functions
   const fetchTwitterData = async (name1, name2) => {
     if (name1 === "" || name2 === "") {
       console.log("Invalid entry")
@@ -59,7 +61,6 @@ const App = () => {
     console.log(names, inputs)
   }
 
-
   return (
     <div>
       State variables: name0:{names[0]} // name1:{names[1]} // input0:{inputs[0]} // input1:{inputs[1]}
@@ -68,96 +69,5 @@ const App = () => {
     </div>
   )
 }
-
-const Form = ({ inputs, handleInput, handleSubmit }) => {
-  return (
-<div>
-    <input value={inputs[0]} id="user1" onChange={handleInput} />
-    <input value={inputs[1]} id="user2" onChange={handleInput} />
-    <button onClick={handleSubmit}> GO! </button>
-</div>
-  )
- }
-
-
-const Display = ({ names, data, fetchData }) => {
-  useEffect(() => {
-    fetchData(names[0], names[1])
-    console.log(data)
-  }, [names])
-
-  if (data.length === 0) {
-    return (
-      <>
-        Enter two usernames to get started!
-        names are {names[0]} and {names[1]}
-      </>
-    )
-  }
-
-
-  console.log(data)
-  console.log(data.mutuals, data.mutuals.length)
-
-  return (
-    <div>
-      <MutualFollowingStatus data={data} />
-    </div>
-  )
-}
-
-
-
-const MutualFollowingStatus = ({ data }) => {
-  const ID1 = data.user1.ID
-  const ID2 = data.user2.ID
-
-  const name1 = data.user1.username
-  const name2 = data.user2.username
-  
-  const friendsList1 = data.user1.friends
-  const friendsList2 = data.user2.friends
-
-  const oneFollowsTwo = friendsList1.includes(ID2)
-  const twoFollowsOne = friendsList2.includes(ID1)
-
-  let status;
-  if (oneFollowsTwo && twoFollowsOne) {
-      status = <div> 
-          @{name1} and @{name2} are following each other.
-        </div>
-  } else if (oneFollowsTwo) {
-    status = <div> 
-        @{name1} follows @{name2}, but the feeling is not mutual. 
-      </div>
-  } else if (twoFollowsOne) {
-    status = <div> 
-        @{name2} follows @{name1}, but the feeling is not mutual. 
-      </div>
-  } else {
-    status = <div> 
-        @{name1} and @{name2} do not follow each other. 
-      </div>
-  } 
-
-  const eachUser = (user) => {
-    return (
-      <div>
-        {user.name} 
-        <a href={"https://twitter.com/" + user.username}> (@{user.username})</a> 
-      </div>
-    )
-  }
-
-
-  return (
-    <div>
-      {status}
-      Furthermore, there are {data.mutuals.data.length} users that they both follow: 
-      {data.mutuals.data.map((user) => eachUser(user))}
-    </div>
-  )
-}
-
 
 export default App
