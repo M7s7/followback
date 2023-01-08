@@ -4,7 +4,11 @@ const baseUrl = process.env.REACT_APP_SERVER_URL
 
 const userID = async (user) => {
   try {
-    const res = await axios.get(`${baseUrl}/ID?user=${user}`)
+    const res = await axios.get(`${baseUrl}/ID`, {
+      params: {
+        user:user
+      }
+    })
     return res.data
 
   } catch (err) {
@@ -15,7 +19,11 @@ const userID = async (user) => {
 
 const userFollowing = async (ID) => {
   try {
-    const res = await axios.get(`${baseUrl}/following?ID=${ID}`)
+    const res = await axios.get(`${baseUrl}/following`, {
+      params: {
+        ID:ID
+      }
+    })
     console.log(res.data)
     return res.data
 
