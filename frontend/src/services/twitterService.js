@@ -12,7 +12,7 @@ const userID = async (user) => {
     return res.data
 
   } catch (err) {
-    console.error(`ERROR: ${err}`)
+    console.error(`TwitterService 'userID' error: ${err}`)
   }
 }
 
@@ -28,7 +28,7 @@ const userFollowing = async (ID) => {
     return res.data
 
   } catch (err) {
-    console.error(`ERROR: ${err}`)
+    console.error(`TwitterService 'userFollowing' error: ${err}`)
   }
 }
 
@@ -45,8 +45,25 @@ const getMutuals = async (list1, list2) => {
     return res.data
 
   } catch (err) {
-    console.error(`ERROR: ${err}`)
+    console.error(`TwitterService 'getMutuals' error: ${err}`)
   }
 }
 
-export { userID, userFollowing, getMutuals }
+
+const getTweets = async (tweeter, mentioned) => {
+  try {
+    const res = await axios.get(`${baseUrl}/mentions`, {
+      params: {
+        tweeter:tweeter,
+        mentioned:mentioned
+      }
+    })
+    console.log(res)
+    return res.data._realData.data
+
+  } catch (err) {
+    console.error(`TwitterService 'getTweets' error: ${err}`)
+  }
+}
+
+export { userID, userFollowing, getMutuals, getTweets }
