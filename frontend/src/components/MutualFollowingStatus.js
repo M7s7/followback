@@ -1,3 +1,6 @@
+import { VStack, Center } from '@chakra-ui/react'
+import { UserCard } from './UIElements'
+
 const MutualFollowingStatus = ({ data }) => {
   const ID1 = data.user1.ID
   const ID2 = data.user2.ID
@@ -30,21 +33,19 @@ const MutualFollowingStatus = ({ data }) => {
       </div>
   } 
 
-  const eachUser = (user) => {
-    return (
-      <div>
-        {user.name} 
-        <a href={"https://twitter.com/" + user.username}> (@{user.username})</a> 
-        <img src={user.profile_image_url} />
-      </div>
-    )
-  }
-
   return (
     <div>
       {status}
       Furthermore, there are {data.mutuals.data.length} users that they both follow: 
-      {data.mutuals.data.map((user) => eachUser(user))}
+      <Center>
+        <VStack>
+          {data.mutuals.data.map((user) => UserCard(user))}
+        </VStack>
+
+      </Center>
+      
+
+      
     </div>
   )
 }

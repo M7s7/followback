@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { ChakraProvider } from '@chakra-ui/react'
 import { userID, userFollowing, getMutuals, getTweets } from './services/twitterService'
 import { Display, Form } from './components'
 
@@ -72,11 +73,14 @@ const App = () => {
   }
 
   return (
-    <div>
-      <h1>followback - is the feeling mutual? </h1>
-      <Form inputs={inputs} handleInput={handleInput} handleSubmit={handleSubmit} />
-      <Display names={names} data={data} fetchData={fetchTwitterData} />
-    </div>
+    <ChakraProvider>
+      <div>
+        names are {names[0]} and {names[1]}
+        <h1>followback - is the feeling mutual? </h1>
+        <Form inputs={inputs} handleInput={handleInput} handleSubmit={handleSubmit} />
+        <Display names={names} data={data} fetchData={fetchTwitterData} />
+      </div>
+    </ChakraProvider>
   )
 }
 
