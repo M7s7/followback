@@ -20,7 +20,11 @@ const MutualTweets = ({ tweeter, mentioned, tweetList }) => {
 
   return (
       <div>
-        @{tweeter} has mentioned @{mentioned} {tweetList.length} times in their recent tweets:
+        @{tweeter} has mentioned @{mentioned} 
+        {tweetList.length === 1 ? 
+        ` ${tweetList.length} time `
+        :` ${tweetList.length} times `}
+         in their recent tweets:
         {tweetList.map((tweet) => renderTweet(tweet))}
       </div>
   )

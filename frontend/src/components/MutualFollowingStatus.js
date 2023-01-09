@@ -1,12 +1,12 @@
-import { VStack, Center } from '@chakra-ui/react'
+import { VStack, Center, Text } from '@chakra-ui/react'
 import { UserCard } from './UIElements'
 
 const MutualFollowingStatus = ({ data }) => {
   const ID1 = data.user1.ID
   const ID2 = data.user2.ID
 
-  const name1 = <a href={`https://twitter.com/${data.user1.username}`}> {data.user1.username} </a>
-  const name2 = <a href={`https://twitter.com/${data.user2.username}`}> {data.user2.username} </a>
+  const name1 = <a href={`https://twitter.com/${data.user1.username}`}><b>{data.user1.username}</b></a>
+  const name2 = <a href={`https://twitter.com/${data.user2.username}`}><b>{data.user2.username}</b></a>
   
   const friendsList1 = data.user1.friends
   const friendsList2 = data.user2.friends
@@ -16,36 +16,42 @@ const MutualFollowingStatus = ({ data }) => {
 
   let status;
   if (oneFollowsTwo && twoFollowsOne) {
-      status = <div> 
+      status = <Text> 
           @{name1} and @{name2} follow each other. 
-        </div>
+        </Text>
   } else if (oneFollowsTwo) {
-    status = <div> 
+    status = <Text> 
         @{name1} follows @{name2}, but @{name2} does not follow back. 
-      </div>
+      </Text>
   } else if (twoFollowsOne) {
-    status = <div> 
+    status = <Text> 
         @{name2} follows @{name1}, but @{name1} does not follow back. 
-      </div>
+      </Text>
   } else {
-    status = <div> 
+    status = <Text> 
         @{name1} and @{name2} do not follow each other. 
-      </div>
+      </Text>
   } 
 
+  if (data.mutuals.data == null) { 
+    return (
+      <Text>There are no users that they both follow.</Text>
+    )
+  }
+
+  const count = data.mutuals.data.length
   return (
     <div>
-      {status}
-      Furthermore, there are {data.mutuals.data.length} users that they both follow: 
       <Center>
         <VStack>
+          {status}
+          <Text>
+            There {count === 1 ? <>is <b>{count} </b> user </>: <>are <b>{count}</b> users </>} 
+            that they both follow:
+          </Text>
           {data.mutuals.data.map((user) => UserCard(user))}
         </VStack>
-
       </Center>
-      
-
-      
     </div>
   )
 }

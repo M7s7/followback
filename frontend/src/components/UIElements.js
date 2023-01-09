@@ -2,7 +2,7 @@ import { Button, ButtonGroup, Input, InputLeftElement, InputGroup, Box, Text, Fl
 
 const UserCard = (user) => {
     return (
-      <Box w='110%' bg='white' borderWidth='2px' borderRadius='100' pt='2%' pb='2%'>
+      <Box w='120%' bg='white' borderWidth='2px' borderRadius='100' pt='2%' pb='2%'>
         <Flex pl='2%'>
           <Avatar src={user.profile_image_url}/>
           <Box pl='4%'>
@@ -38,11 +38,11 @@ const UserInput = ({ value, id, handleInput }) => {
     )
   }
 
-  const MyButton = ({ value, handleClick, width }) => {
+  const MyButton = ({ value, handleClick, width, color }) => {
     return (
       <ButtonGroup padding='10px'>
         <Button w={width}
-          colorScheme='twitter'
+          colorScheme={color}
           onClick={handleClick}
         >
           {value}
@@ -51,5 +51,6 @@ const UserInput = ({ value, id, handleInput }) => {
       </ButtonGroup>
     )
   }
+
 
 export { UserCard, UserInput, MyButton }
