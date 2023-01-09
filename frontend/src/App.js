@@ -73,7 +73,7 @@ const App = () => {
 
   return (
     <div>
-      State variables: name0:{names[0]} // name1:{names[1]} // input0:{inputs[0]} // input1:{inputs[1]}
+      <h1>followback - is the feeling mutual? </h1>
       <Form inputs={inputs} handleInput={handleInput} handleSubmit={handleSubmit} />
       <Display names={names} data={data} fetchData={fetchTwitterData} />
     </div>
