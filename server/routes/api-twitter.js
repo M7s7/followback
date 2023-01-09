@@ -10,7 +10,8 @@ const getID = async (req, res, next) => {
     next()
 
   } catch (err) {
-    console.log(`Server error - 'getID: ${err}`);
+    console.log(`Server error - 'getID: ${err}`)
+    res.send(err)
   }
 }
 
@@ -23,7 +24,8 @@ const getFollowing = async (req, res, next) => {
     next()
 
   } catch (err) {
-    console.log(`Server error - 'getFollowing: ${err}`);
+    console.log(`Server error - 'getFollowing: ${err}`)
+    res.send(err)
   }
 }
 
@@ -37,13 +39,22 @@ const searchTweets = async (req, res, next) => {
     next()
 
   } catch (err) {
-    console.log(`Server error - 'searchTweets: ${err}`);
+    console.log(`Server error - 'searchTweets: ${err}`)
+    res.send(err)
   }
 }
 
 const IDstoUsers = async (req, res, next) => {
   try {
     const IDList = JSON.parse(req.query.IDs)
+    console.log(IDList, IDList.length)
+
+    if (IDList.length === 0 || IDList.length > 100) {
+      console.log(`List is too long/short - 'IDstoUsers'`)
+      res.send(IDList)
+      return
+    }
+
     const users = await client.v2.users(IDList, {
       'user.fields':'profile_image_url'
     })
@@ -52,7 +63,8 @@ const IDstoUsers = async (req, res, next) => {
     next()
 
   } catch (err) {
-    console.log(`Server error - 'IDstoUsers: ${err}`);
+    console.log(`Server error - 'IDstoUsers: ${err}`)
+    res.send(err)
   }
 }
 

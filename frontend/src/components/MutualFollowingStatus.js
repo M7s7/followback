@@ -33,9 +33,18 @@ const MutualFollowingStatus = ({ data }) => {
       </Text>
   } 
 
-  if (data.mutuals.data == null) { 
+  if (data.mutuals.length === 0) { 
     return (
       <Text>There are no users that they both follow.</Text>
+    )
+  }
+
+  if (data.mutuals.length > 100) { 
+    return (
+      <Text>
+        There are <b>{data.mutuals.length}</b> users that they both follow.
+        At this stage, followback is not able to render over 100 users.
+      </Text>
     )
   }
 

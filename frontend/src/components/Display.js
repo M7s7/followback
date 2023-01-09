@@ -1,6 +1,6 @@
 import MutualFollowingStatus from './MutualFollowingStatus'
 import { useEffect, useState } from 'react'
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Center } from '@chakra-ui/react'
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Center, Text } from '@chakra-ui/react'
 import { MyButton } from './UIElements'
 import MentionsBlock from './MentionsBlock.js'
 
@@ -12,9 +12,17 @@ const Display = ({ names, data, fetchData }) => {
   const [view, setView] = useState(false)
   if (data.length === 0) {
     return (
-      <>
+      <Text>
         Enter two twitter handles to get started!
-      </>
+      </Text>
+    )
+  }
+
+  if (data.hasOwnProperty('message')) { 
+    return (
+      <Text>Something went wrong. 
+        
+         </Text>
     )
   }
 

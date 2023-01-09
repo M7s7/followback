@@ -12,11 +12,11 @@ const App = () => {
   // Helper functions
   const fetchTwitterData = async (name1, name2) => {
     try {
-      if (name1 === "" || name2 === "") {
-        console.log("fetchTwitterData: Invalid names.")
+      if (name1 === "" && name2 === "") {
+        console.log("App.js: fetchTwitterData: Invalid names.")
         return
       }
-  
+      
       const ID1 = await userID(name1)
       const friends1 = await userFollowing(ID1.data.id)
   
@@ -52,7 +52,8 @@ const App = () => {
       })
 
     } catch (err) {
-      console.log(`fetchTwitterData failed! ${err}`)
+      console.log(`App.js: fetchTwitterData failed! ${err}`)
+      setData(err)
     }
   }
 
