@@ -8,6 +8,7 @@ const App = () => {
   const [names, setNames] = useState(["", ""])
   const [inputs, setInputs] = useState(["", ""])
   const [data, setData] = useState([])
+  const [loading, setLoading] = useState(false)
 
   // Helper functions
   const fetchTwitterData = async (name1, name2) => {
@@ -17,6 +18,7 @@ const App = () => {
         return
       }
       
+      setLoading(true)
       const ID1 = await userID(name1)
       const friends1 = await userFollowing(ID1.data.id)
   
@@ -51,9 +53,12 @@ const App = () => {
         tweets2: user2Tweets
       })
 
+      setLoading(false)
+
     } catch (err) {
       console.log(`App.js: fetchTwitterData failed! ${err}`)
       setData(err)
+      setLoading(false)
     }
   }
 
@@ -85,7 +90,7 @@ const App = () => {
             </Text>
           </Box>
           <Form inputs={inputs} handleInput={handleInput} handleSubmit={handleSubmit} />
-          <Display names={names} data={data} fetchData={fetchTwitterData} />
+          <Display names={names} data={data} fetchData={fetchTwitterData} loading={loading} />
         </VStack>
       </Center>
     </ChakraProvider>
