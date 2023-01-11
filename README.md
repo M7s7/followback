@@ -21,14 +21,10 @@
   <p align="center">
     An app that fetches the common friends and mutually mentioned tweets between two Twitter users.
     <br />
-    <a href="https://github.com/M7s7/followback"><strong>Explore the docs »</strong></a>
+    <a href="https://followback.fly.dev"><strong>View Demo on fly.io »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
-    ·
-    <a href="https://github.com/M7s7/followback/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/M7s7/followback/issues">Request Feature</a>
+    <a href="https://github.com/M7s7/followback/issues">Report Bug or Request Feature</a>
   </p>
 </div>
 
@@ -36,27 +32,24 @@
 
 <!-- TABLE OF CONTENTS -->
 <details>
-  <summary>Table of Contents</summary>
+  <summary align><b>Table of Contents</b></summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#about">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
+      <ul>
+        <li><a href="#limitations">Limitations</a></li>
+      </ul>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -68,7 +61,7 @@
   <img src="https://i.ibb.co/ZSxcGrB/followback-demo.gif" width="80%"/>
 </div>
 
-This project uses the Twitter API to get the following information about users:
+Followback uses the Twitter API to get the following information about users:
 * recent tweets (ie. last 7 days)
 * 'friends' list (ie. accounts that the user follows).
 
@@ -94,19 +87,7 @@ Given two usernames, followback will return:
 
 <!-- GETTING STARTED -->
 ## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
-### Installation
 
 1. Get a free user Access Token by signing up to the Twitter Developer Platform ([Getting Started Documentation](https://developer.twitter.com/en/docs/twitter-api/getting-started/getting-access-to-the-twitter-api))
 2. Clone the repo
@@ -129,6 +110,7 @@ This is an example of how to list things you need to use the software and how to
    ```
    REACT_APP_SERVER_URL = "http://localhost:3001"
    ```
+The app is now ready for deployment. Use `npm start` to launch the frontend, and `node index.js` to launch the server.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -169,7 +151,7 @@ See the [open issues](https://github.com/github_username/repo_name/issues) for a
 
 
 <!-- CONTRIBUTING -->
-# Contributing
+## Contributing
 If you have a suggestion to improve this project, please fork the repo and create a pull request.
 
 1. Fork the Project
