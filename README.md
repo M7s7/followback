@@ -1,3 +1,5 @@
+<a name="readme-top"></a>
+
 <!-- PROJECT SHIELDS -->
 <!--
 *** I'm using markdown "reference style" links for readability.
@@ -19,14 +21,14 @@
   <p align="center">
     An app that fetches the common friends and mutually mentioned tweets between two Twitter users.
     <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/M7s7/followback"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/github_username/repo_name">View Demo</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
+    <a href="https://github.com/M7s7/followback/issues">Report Bug</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
+    <a href="https://github.com/M7s7/followback/issues">Request Feature</a>
   </p>
 </div>
 
@@ -61,18 +63,30 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## About
+<div align="center">
+  <img src="https://i.ibb.co/ZSxcGrB/followback-demo.gif" width="80%"/>
+</div>
 
-[![Product Name Screen Shot][product-screenshot]](https://i.ibb.co/ZSxcGrB/followback-demo.gif)
+This project uses the Twitter API to get the following information about users:
+* recent tweets (ie. last 7 days)
+* 'friends' list (ie. accounts that the user follows).
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+Given two usernames, followback will return:
+* whether or not the users follow each other
+* a list of mutual friends between the two users (ie. accounts which both users follow)
+* any recent tweets which one user mentioned the other, and vice versa.
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
 ### Built With
-[![React][React.js]][React-url] [![Node][Node.js]][Node.js-url][![Express][Express.js]][Express.js-url][![Chakra][Chakra.ui]][Chakra.ui-url]
+* [![React][React.js]][React-url] 
+* [![Node][Node.js]][Node.js-url]
+* [![Express][Express.js]][Express.js-url]
+* [![Chakra][Chakra.ui]][Chakra.ui-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -99,18 +113,22 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    git clone https://github.com/M7s7/followback.git
    ```
-3. Install NPM packages in the frontend and backend directories
+3. Install NPM packages in the `frontend` and `server` folders
    ```sh
    cd frontend
    npm install
    cd ../server
    npm install
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+4. Create a `.env` file in the roots of both the `frontend` and `server` folders
+5. Enter your access token in `.env` in the `server` folder:
    ```
-
+   BEARER_TOKEN = 'ENTER_TOKEN';
+   ```
+6. Enter your base server address in `.env` in the `frontend` folder. For example:
+   ```
+   REACT_APP_SERVER_URL = "http://localhost:3001"
+   ```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -118,9 +136,19 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+The 'About' section of this `readme` has a good demonstration of how the app works.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+### Limitations
+Given the stringent [rate limits for the Twitter API](https://developer.twitter.com/en/docs/twitter-api/rate-limits), only 7 unique requests can be made in any 15 minute interval. The API restrictions also mean that: 
+* maximum friends list size for each user that followback can look through is **5,000**
+* maximum mutual friends size that can be returned in list form is **100**
+* maximum age of tweets searched is **7 days old**.
+
+Occasionally, followback will provide a 'Something went wrong' error. This error may be caused by, among other things:
+* the rate limit being reached
+* an invalid username
+* a suspended username.
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -129,10 +157,10 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
+- [ ] Specific error codes to replace 'Something went wrong', to provide better troubleshooting
+- [ ] Support for other social media platforms
+- [ ] Pagination functionality with Twitter's API to increase the limit on friends searched and mutual friends returned
+- [ ] Improved styling, including dark mode
 
 See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
 
@@ -141,18 +169,16 @@ See the [open issues](https://github.com/github_username/repo_name/issues) for a
 
 
 <!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
+# Contributing
+If you have a suggestion to improve this project, please fork the repo and create a pull request.
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
+
+Alternatively, open an issue with the tag "suggestion".
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -165,27 +191,6 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
-<!-- CONTACT -->
-## Contact
-
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
-
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
