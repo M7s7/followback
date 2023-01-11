@@ -27,6 +27,7 @@ const UserInput = ({ value, id, handleInput }) => {
           color='gray.500'
         />
         <Input size='md'
+          autoComplete='off'
           placeholder='username'
           variant='filled'
           bg='gray.100'
