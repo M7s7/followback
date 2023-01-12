@@ -96,7 +96,7 @@ To get a local copy up and running follow these simple example steps.
    ```
 3. Install NPM packages in the `frontend` and `server` folders
    ```sh
-   cd frontend
+   cd followback/frontend
    npm install
    cd ../server
    npm install
