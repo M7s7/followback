@@ -6,9 +6,6 @@ An app that fetches the common friends and mutually mentioned tweets between two
     <br />
 
 ## Description
-<div align="center">
-  <img src="https://i.ibb.co/ZSxcGrB/followback-demo.gif" width="50%"/>
-</div>
 
 Followback uses the Twitter API to get the following information about users:
 * recent tweets (ie. last 7 days)
@@ -20,6 +17,10 @@ Given two usernames, followback will return:
 * a list of any recent tweets which one user mentioned the other, and vice versa.
 
 Followback is built using React and Express.js, and uses styled components from the Chakra UI library. 
+
+<div align="center">
+  <img src="https://i.ibb.co/ZSxcGrB/followback-demo.gif" width="50%"/>
+</div>
 
 ## Getting Started
 
